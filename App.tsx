@@ -44,13 +44,14 @@ export default function App() {
         setResult(parseFloat(num1) + parseFloat(num2));
         break;
       case '-':
-        setResult(parseFloat(num1) - parseFloat(num2));
+        setResult(parseFloat(num2) - parseFloat(num1));
         break;
+
       case 'x':
         setResult(parseFloat(num1) * parseFloat(num2));
         break;
       case '/':
-        setResult(parseFloat(num1) / parseFloat(num2));
+        setResult(parseFloat(num2) / parseFloat(num1));
         break;
       case '%':
         setResult(parseFloat(num1) / 100);
@@ -63,28 +64,32 @@ export default function App() {
         setResult(0);
         break;
     }
-    setNum2('');
-    setOperator('');
   };
 
   const firstNumberDisplay = () => {
     if (result != null) {
       if (result.length < 5) {
-        return <Text style={{color: '#FF9500'}}>{result}</Text>;
+        return <Text style={{color: '#FF9500'}}> = {result?.toString()}</Text>;
       } else {
-        return <Text style={{color: '#FF9500', fontSize: 60}}>{result}</Text>;
+        return (
+          <Text style={{color: '#FF9500', fontSize: 60}}>
+            {' '}
+            = {result?.toString()}
+          </Text>
+        );
       }
-    }
-    if (num1.length > 4 && num1.length < 10) {
-      return <Text style={{fontSize: 50}}>{num1}</Text>;
-    }
-    if (num1.length >= 10) {
-      return <Text style={{fontSize: 30}}>{num1}</Text>;
-    }
-    if (num1 === '') {
-      return '0';
     } else {
-      return num1;
+      if (num1.length > 4 && num1.length < 10) {
+        return <Text style={{fontSize: 50}}>{num1}</Text>;
+      }
+      if (num1.length >= 10) {
+        return <Text style={{fontSize: 30}}>{num1}</Text>;
+      }
+      if (num1 === '') {
+        return '0';
+      } else {
+        return num1;
+      }
     }
   };
 
@@ -108,27 +113,18 @@ export default function App() {
               paddingBottom: 20,
             }}>
             <View>
-              {colorScheme === 'light' ? (
-                <Text style={{fontSize: 75, color: '#000'}}>
-                  {num2}
-                  <Text style={{color: '#000', fontSize: 70}}>{operator}</Text>
-                </Text>
-              ) : (
-                <Text style={{fontSize: 75, color: '#fff'}}>
-                  {num2}
-                  <Text style={{color: '#fff', fontSize: 70}}>{operator}</Text>
-                </Text>
-              )}
+              <Text style={{fontSize: 50, color: '#000'}}>
+                {num2}
+                <Text style={{color: '#000', fontSize: 50}}>{operator}</Text>
+                {num2 === '' || (!result && num2 !== '') ? null : (
+                  <Text style={{color: '#000', fontSize: 50}}>{num1}</Text>
+                )}
+              </Text>
             </View>
-            {colorScheme === 'light' ? (
-              <Text style={{color: '#000', fontSize: 75}}>
-                {firstNumberDisplay()}
-              </Text>
-            ) : (
-              <Text style={{color: '#fff', fontSize: 75}}>
-                {firstNumberDisplay()}
-              </Text>
-            )}
+
+            <Text style={{color: '#000', fontSize: 75}}>
+              {firstNumberDisplay()}
+            </Text>
           </View>
           <View style={{flex: 1, marginBottom: 20}}>
             <View
@@ -288,27 +284,18 @@ export default function App() {
               paddingBottom: 20,
             }}>
             <View>
-              {colorScheme === 'light' ? (
-                <Text style={{fontSize: 75, color: '#000'}}>
-                  {num2}
-                  <Text style={{color: '#000', fontSize: 70}}>{operator}</Text>
-                </Text>
-              ) : (
-                <Text style={{fontSize: 75, color: '#fff'}}>
-                  {num2}
-                  <Text style={{color: '#fff', fontSize: 70}}>{operator}</Text>
-                </Text>
-              )}
+              <Text style={{fontSize: 50, color: '#fff'}}>
+                {num2}
+                <Text style={{color: '#fff', fontSize: 50}}>{operator}</Text>
+                {num2 === '' || (!result && num2 !== '') ? null : (
+                  <Text style={{color: '#fff', fontSize: 50}}>{num1}</Text>
+                )}
+              </Text>
             </View>
-            {colorScheme === 'light' ? (
-              <Text style={{color: '#000', fontSize: 75}}>
-                {firstNumberDisplay()}
-              </Text>
-            ) : (
-              <Text style={{color: '#fff', fontSize: 75}}>
-                {firstNumberDisplay()}
-              </Text>
-            )}
+
+            <Text style={{color: '#fff', fontSize: 75}}>
+              {firstNumberDisplay()}
+            </Text>
           </View>
           <View style={{flex: 1, marginBottom: 20}}>
             <View
